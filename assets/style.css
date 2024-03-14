@@ -1,0 +1,36 @@
+:root {
+  --color-green: #3b8952;
+  --color-black: #1c232e;
+  --color-green-black: #0f684b;
+  --color-blue-dark: #1c232e;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.bg-green-black {
+  background-color: var(--color-green-black);
+}
+
+.cl-green {
+  color: var(--color-green);
+}
+
+.rm-a-style > *{
+  text-decoration: none;
+  color: var(--color-black);
+  padding: 0 15px;
+}
+
+/*MAIN*/
+.title {
+  font-size: 55px;
+  font-weight: bold;
+}
+
+.cont-text {
+  margin-top: 15rem;
+  padding-left: 5rem;
+}
+

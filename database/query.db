@@ -1,0 +1,83 @@
+--DDL
+
+--NOMBRE BASE DE DATOS inmovision_db
+
+CREATE TABLE admin(
+	admin_id INT AUTO_INCREMENT,
+    nombre VARCHAR(80) NOT NULL,
+    correo VARCHAR(70) NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_admin PRIMARY KEY(admin_id)
+);
+
+CREATE TABLE cliente(
+	cliente_id INT AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    correo VARCHAR(70) NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
+    estado_civil VARCHAR(30) NOT NULL,
+    telefono VARCHAR(10) NOT NULL,
+    cedula VARCHAR(10) NOT NULL UNIQUE,
+    CONSTRAINT pk_cliente PRIMARY KEY(cliente_id)
+);
+
+CREATE TABLE fiador(
+	fiador_id INT AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
+    correo VARCHAR(70) NOT NULL,
+    telefono VARCHAR(10) NOT NULL,
+    cedula VARCHAR(10) NOT NULL UNIQUE,
+    CONSTRAINT pk_fiador PRIMARY KEY(fiador_id)
+);
+
+CREATE TABLE inmueble(
+	inmueble_id INT AUTO_INCREMENT,
+    titulo VARCHAR(30) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    imagen TEXT NOT NULL,
+    tipo VARCHAR(30) NOT NULL,
+    area NUMERIC(4,0) NOT NULL,
+    precio NUMERIC(18,2) NOT NULL,
+    habitaciones INT NOT NULL,
+    banos INT NOT NULL,
+    CONSTRAINT pk_inmueble PRIMARY KEY(inmueble_id),
+    cliente_fk INT,
+    CONSTRAINT fk_cliente_i FOREIGN KEY(cliente_fk) REFERENCES cliente(cliente_id),
+    fiador_fk INT,
+    CONSTRAINT fk_fiador_i FOREIGN KEY(fiador_fk) REFERENCES fiador(fiador_id)
+);
+
+--DML ADMIN
+INSERT INTO admin(nombre,correo,contrasena) VALUES('admin','admin@gmail.com','admin123');
+
+--DML CLIENTE
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Andrés', 'Díaz', 'andres.diaz@example.com', 'secreto123', 'Soltero', '3112345678', '1234567890');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('María', 'Londoño', 'maria.londono@example.com', 'clave123', 'Casada', '3009876543', '0987654321');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, telefono, cedula)
+VALUES ('Camilo', 'Gutiérrez', 'camilo.gutierrez@example.com', 'secreto456', '3115554444', '1122334455');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Laura', 'Hernández', 'laura.hernandez@example.com', 'clave789', 'Soltera', '3102223333', '3344556677');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Pedro', 'Gómez', 'pedro.gomez@example.com', 'abc', 'Casado', '3174445555', '5566778899');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Ana', 'Martínez', 'ana.martinez@example.com', 'secreto987', 'Soltera', '3127778888', '9876543210');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Roberto', 'González', 'roberto.gonzalez@example.com', 'clave246', 'Casado', '3183334444', '1122334455');
+INSERT INTO cliente (nombre, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Isabel', 'isabel@example.com', 'secreto135', 'Soltera', '3149990000', '8765432109');
+INSERT INTO cliente (nombre, apellido, correo, contrasena, estado_civil, telefono, cedula)
+VALUES ('Diana', 'Castro', 'diana.castro@example.com', 'secreto246', 'Soltera', '3195556666', '5432109876');
+
+
+--DML INMUEBLE
+INSERT INTO inmueble (titulo, direccion, imagen, tipo, area, precio, habitaciones, banos) VALUES ('Casa Moderna', '123 Calle Principal', 'https://images.pexels.com/photos/3288102/pexels-photo-3288102.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Casa', 120, 350000.00, 3, 2);
+INSERT INTO inmueble (titulo, direccion, imagen, tipo, area, precio, habitaciones, banos) VALUES ('Apartamento Centrico', '456 Avenida Secundaria', 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Apartamento', 80, 250000.00, 2, 1);
+INSERT INTO inmueble (titulo, direccion, imagen, tipo, area, precio, habitaciones, banos) VALUES ('Chalet de Lujo', '789 Camino de la Sierra', 'https://images.pexels.com/photos/3288104/pexels-photo-3288104.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Chalet', 200, 750000.00, 4, 3);
+INSERT INTO inmueble (titulo, direccion, imagen, tipo, area, precio, habitaciones, banos) VALUES ('Estudio Nuevo', '321 Callejón del Pintor', 'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Estudio', 40, 150000.00, 1, 1);
+INSERT INTO inmueble (titulo, direccion, imagen, tipo, area, precio, habitaciones, banos) VALUES ('Villa con Piscina', '654 Avenida del Mar', 'https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 'Villa', 180, 600000.00, 3, 2);
+
+
